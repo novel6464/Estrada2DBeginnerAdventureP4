@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     }
     void FixedUpdate()
     {
-       Vector2 position = (Vector2)rigidbody2D.position + move * 3.0f * Time.fixedDeltaTime;
+       Vector2 position = (Vector2)rigidbody2D.position + move * 10.0f * Time.fixedDeltaTime;
         rigidbody2D.MovePosition(position);
     }
 }
