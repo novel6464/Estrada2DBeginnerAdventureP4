@@ -13,10 +13,10 @@ public class DamageZibe : MonoBehaviour
 
 
 
-            if (controller != null && controller.health < controller.maxHealth)
+            if (controller != null)
             {
-                controller.ChangeHealth(1);
-                Destroy(gameObject);
+                controller.ChangeHealth(-1);
+                
             }
         }
 
