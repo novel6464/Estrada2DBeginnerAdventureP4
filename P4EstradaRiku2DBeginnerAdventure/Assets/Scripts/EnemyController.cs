@@ -60,4 +60,15 @@ public class EnemyController : MonoBehaviour
             player.ChangeHealth(-1);
         }
     }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Destroy(gameObject);
+
+    }
+    public void Fix()
+    {
+        broken = false;
+        GetComponent<rigidbody2D>().simulated = false;
+        animator.SetTrigger("Fixed");
+    }
 }

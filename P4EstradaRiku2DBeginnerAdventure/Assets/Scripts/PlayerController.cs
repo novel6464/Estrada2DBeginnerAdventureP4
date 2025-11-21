@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     Vector2 move;
     public float Speed = 3.0f;
 
-    // Variables related to temeroraru invincibility
+    // Variables related to temerorary invincibility
     public float timeInvincible = 2.0f;
     bool isInvincible;
     float damageCooldown;
@@ -23,6 +23,9 @@ public class PlayerController : MonoBehaviour
     // Variables related to animation
         Animator animator;
     Vector2 moveDirection = new Vector2(1, 0);
+    // Variables related to projectile launching
+    public GameObject projectilePrefab;
+
 
 
     // Start is called before the first frame update
@@ -59,8 +62,11 @@ public class PlayerController : MonoBehaviour
                 isInvincible = false;
             
         }
+        if (Input.GetKeyDown(KeyCode.C))
+        {
 
-
+            Launch();
+        }
     }
 
 
