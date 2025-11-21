@@ -2,20 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
 public class PlayerController : MonoBehaviour
 {
-   
-
-
     // Variables related to the health system
     public int maxHealth = 5;
     int currentHealth;
-    public int health { get { return currentHealth; } }
+    public int health { get { return currentHealth; }}
 
     // Variables related to player character movement
     public InputAction MoveAction;
-    Rigidbody2D rigidbody2d;
+    Rigidbody2D rigidbody2D;
     Vector2 move;
     public float Speed = 3.0f;
 
@@ -25,11 +21,8 @@ public class PlayerController : MonoBehaviour
     float damageCooldown;
 
     // Variables related to animation
-    Animator animator;
+        Animator animator;
     Vector2 moveDirection = new Vector2(1, 0);
-
-    // Variables related to projectile 
-    public GameObject projectileObject;
 
 
     // Start is called before the first frame update
@@ -37,7 +30,7 @@ public class PlayerController : MonoBehaviour
     {
         currentHealth = maxHealth;
         MoveAction.Enable();
-        rigidbody2d = GetComponent<Rigidbody2D>();
+        rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
 
@@ -62,23 +55,21 @@ public class PlayerController : MonoBehaviour
         {
             damageCooldown -= Time.deltaTime;
             if (damageCooldown < 0)
-
+            
                 isInvincible = false;
-
+            
         }
 
 
     }
-    
 
 
-        
     // FixedUpdate has the same call rate as the physics system
     void FixedUpdate()
     {
 
-        Vector2 position = (Vector2)GetComponent<Rigidbody2D>().position + move * 10.0f * Time.fixedDeltaTime;
-        GetComponent<Rigidbody2D>().MovePosition(position);
+        Vector2 position = (Vector2)rigidbody2D.position + move * 10.0f * Time.fixedDeltaTime;
+        rigidbody2D.MovePosition(position);
     }
     
     public void ChangeHealth (int amount)
@@ -96,11 +87,4 @@ public class PlayerController : MonoBehaviour
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         UIHandler.instance.SetHealthValue(currentHealth / (float)maxHealth);
     }
-    void Launch()
-    {
-        GameObject projectile = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
-        Projectile projectile = projectileObject.GetComponent<Projectile>();
-        projectile.Launch(moveDirection, 300);
-        animator.SetTrigger("Launch");
-    }   
 }
